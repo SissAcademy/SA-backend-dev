@@ -57,3 +57,9 @@ typings/
 # dotenv environment variables file
 .env
 
+## Ignore project files created by IntelliJ IDEA
+*.iml
+*.ipr
+*.iws
+.idea/
+overlays/
