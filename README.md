@@ -20,6 +20,6 @@ To test stuff do some proxy:
 Create a new user
 + method: Post
 + url: localhost:5001//users/create
-+ data: {email,password, username}
++ data: {email,password}
 
 Check users/routes for more requests

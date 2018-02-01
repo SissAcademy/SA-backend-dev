@@ -6,7 +6,6 @@ var User = require('./schema');
 
 exports.createUser = function(userData){
     var user = {
-        username: userData.username,
         email: userData.email,
         password: hash(userData.password)
     };
@@ -24,7 +23,7 @@ exports.checkUser = function(userData) {
             if (doc != null && doc.password === hash(userData.password)) {
                 return Promise.resolve(doc);
             } else {
-                return Promise.reject("Invalid username or password");
+                return Promise.reject("Invalid email or password");
             }
         });
 };

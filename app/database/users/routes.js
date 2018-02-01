@@ -10,7 +10,7 @@ module.exports = function(router, db) {
         api.checkUser(req.body)
             .then(function(user){
                 if(user){
-                    req.session.user = {id: user._id, username: user.username};
+                    req.session.user = {id: user._id, email: user.email};
                     res.send("Login successful");
                 } else {
                     return next(error);
@@ -29,7 +29,7 @@ module.exports = function(router, db) {
             })
             .catch(function(err) {
                 if (err.toJSON().code === 11000){
-                    res.status(500).send("This email or username already exist");
+                    res.status(500).send("This email already exist");
                 }
             });
     });
