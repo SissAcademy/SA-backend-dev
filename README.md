@@ -14,12 +14,10 @@ In the end, there might be some uninstalled packages left, you'll have to manual
 
 I personally prefer to use Git Bash as CLI. With it you can right click inside of directory and open CLI directly there.
 
-# Test routes
-To test stuff do some proxy:
+# Routing API
 
-Create a new user
-+ method: Post
-+ url: localhost:5001//users/create
-+ data: {email,password}
-
-Check users/routes for more requests
+Use | URL | Parameters
+--- | --- | ---
+Login | `/login` | `email`, `password`
+Logout | `/logout` | N/A
+Register | `/users/create` | `email`, `password`
