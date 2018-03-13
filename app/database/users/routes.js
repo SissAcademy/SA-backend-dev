@@ -30,6 +30,8 @@ module.exports = function(router, db) {
             .catch(function(err) {
                 if (err.toJSON().code === 11000){
                     res.status(500).send("This email already exist");
+                } else {
+                    res.status(500).send(err);
                 }
             });
     });
@@ -42,5 +44,33 @@ module.exports = function(router, db) {
             res.status(500).send("No user logged in");
         }
     });
+
+    router.post('/users/report', function (req, res, next) {
+        if (req.session.user) {
+            api.report(req.body, req.session.user)
+                .then(function(result) {
+                    res.send("Habit(s) reported successfully");
+                })
+                .catch(function(err) {
+                    res.status(500).send(err);
+                })
+        } else {
+            res.status(403).send("No user logged in");
+        }
+    });
+
+    router.post('/users/habits', function (req, res, next) {
+        if (req.session.user) {
+            api.habits(req.session.user)
+                .then(function(result) {
+                    res.send(result);
+                })
+                .catch(function(err) {
+                    res.status(500).send(err);
+                })
+        } else {
+            res.status(403).send("No user logged in");
+        }
+    })
 };
 

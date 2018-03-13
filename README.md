@@ -21,3 +21,5 @@ Use | URL | Parameters
 Login | `/login` | `email`, `password`
 Logout | `/logout` | N/A
 Register | `/users/create` | `email`, `password`
+Habits | `/users/habits` | N/A
+Report Habit | `/users/report` | `group`, `subgroup`, `option`, `day`

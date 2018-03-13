@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var User = new mongoose.Schema({
+var userSchema = new mongoose.Schema({
     email : {
         type: String,
         unique: true,
@@ -10,5 +10,32 @@ var User = new mongoose.Schema({
         required: true
     }
 });
+var User = mongoose.model('User', userSchema);
 
-module.exports = mongoose.model('User', User);
+var habitSchema = new mongoose.Schema({
+    group : {
+        type: String
+    },
+    subgroup : {
+        type: String
+    },
+    option : {
+        type: String,
+        enum: [
+            'done',
+            'partly-done',
+            'empty',
+            'missed',
+            'failed',
+            'denied'
+        ]
+    },
+    day : Date,
+    user : String
+});
+var Habit = mongoose.model('Habit', habitSchema);
+
+module.exports = {
+    User : User,
+    Habit : Habit
+};
