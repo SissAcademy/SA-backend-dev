@@ -2,16 +2,22 @@ var express = require('express');
 var router = express.Router();
 var ObjectID = require('mongodb').ObjectID;
 var api = require('./api.js');
+var jwt = require('jsonwebtoken');
+
+// TODO some of the methods here could be extract to different controller files
 
 module.exports = function(router, db) {
     router.post('/login', function(req, res, next) {
-        if (req.session.user) return res.redirect('/');
+        //if (req.session.user) return res.redirect('/');
 
         api.checkUser(req.body)
             .then(function(user){
                 if(user){
-                    req.session.user = {id: user._id, email: user.email};
-                    res.send("Login successful");
+                    var token = jwt.sign({email: user.email, _id: user._id}, 'mypass');
+                    return res.json({token: token})
+
+                    //req.session.user = {id: user._id, email: user.email};
+                    //res.send("Login successful");
                 } else {
                     return next(error);
                 }
