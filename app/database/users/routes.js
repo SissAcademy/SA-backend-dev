@@ -7,28 +7,8 @@ var jwt = require('jsonwebtoken');
 // TODO some of the methods here could be extract to different controller files
 
 module.exports = function(router, db) {
-    router.post('/login', function(req, res, next) {
-        //if (req.session.user) return res.redirect('/');
 
-        api.checkUser(req.body)
-            .then(function(user){
-                if(user){
-                    var token = jwt.sign({email: user.email, _id: user._id}, 'mypass');
-                    return res.json({token: token})
-
-                    //req.session.user = {id: user._id, email: user.email};
-                    //res.send("Login successful");
-                } else {
-                    return next(error);
-                }
-            })
-            .catch(function(error){
-                return next(error);
-            });
-
-    });
-
-    router.post('/users/create', function(req, res, next) {
+    router.post('/signup', function(req, res, next) {
         api.createUser(req.body)
             .then(function(result) {
                 res.send(result);
@@ -42,41 +22,41 @@ module.exports = function(router, db) {
             });
     });
 
-    router.post('/logout', function(req, res, next) {
-        if (req.session.user) {
-            delete req.session.user;
-            res.send("Logout successful");
-        } else {
-            res.status(500).send("No user logged in");
-        }
+    router.post('/login', function(req, res, next) {
+        api.checkUser(req.body)
+            .then(function(user){
+                if(user){
+                    var token = jwt.sign({email: user.email, id: user._id}, 'mypass');
+                    return res.json({token: token})
+                } else {
+                    return next(error);
+                }
+            })
+            .catch(function(error){
+                return next(error);
+            });
+
     });
 
     router.post('/users/report', function (req, res, next) {
-        if (req.session.user) {
-            api.report(req.body, req.session.user)
-                .then(function(result) {
-                    res.send("Habit(s) reported successfully");
-                })
-                .catch(function(err) {
-                    res.status(500).send(err);
-                })
-        } else {
-            res.status(403).send("No user logged in");
-        }
+        api.report(req.body, req.user)
+            .then(function(result) {
+                res.send("Habit(s) reported successfully");
+            })
+            .catch(function(err) {
+                res.status(500).send(err);
+            });
     });
 
     router.post('/users/habits', function (req, res, next) {
-        if (req.session.user) {
-            api.habits(req.session.user)
-                .then(function(result) {
-                    res.send(result);
-                })
-                .catch(function(err) {
-                    res.status(500).send(err);
-                })
-        } else {
-            res.status(403).send("No user logged in");
-        }
-    })
+        api.habits(req.user)
+            .then(function(result) {
+                res.send(result);
+            })
+            .catch(function(err) {
+                res.status(500).send(err);
+            });
+    });
+
 };
 
