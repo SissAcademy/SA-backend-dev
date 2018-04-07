@@ -3,8 +3,6 @@ node_js:
 - '8'
 script:
 - npm test
-before_install:
-  - bash scripts/setDeployKey.sh 
 deploy:
   provider: script
   script: bash scripts/deploy.sh
