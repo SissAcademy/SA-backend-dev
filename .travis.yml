@@ -4,8 +4,7 @@ node_js:
 script:
 - npm test
 before_install:
-  provider: script
-  script: bash scripts/setDeploymentKey.sh
+  - bash scripts/setDeploymentKey.sh
 deploy:
   provider: script
   script: bash scripts/deploy.sh
