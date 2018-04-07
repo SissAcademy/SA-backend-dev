@@ -6,6 +6,7 @@ ssh-add /tmp/deploy_rsa # Add the private key to SSH
 q
 ssh -o "StrictHostKeyChecking no" $DEPLOY_USER@$BACKEND_SERVER <<EOF
   cd SA-backend-dev/
+  git checkout -- .
   git checkout do-deploy
   git pull
   npm install
