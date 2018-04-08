@@ -1,5 +1,7 @@
 'use strict';
 
+let jwt = require('jsonwebtoken');
+
 function authentication(req, res, next) {
     var unsecurePaths = ['/login', '/signup'];
     if (unsecurePaths.includes(req.originalUrl)) {
