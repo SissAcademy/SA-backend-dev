@@ -1,0 +1,13 @@
+definitions:
+  NewUser:
+    type: "object"
+    properties: 
+      id:
+        type: "string"
+      email:
+        type: "string"
+  JWToken:
+    type: "object"
+    properties: 
+      token: 
+        type: "string"

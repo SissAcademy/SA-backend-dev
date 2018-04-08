@@ -28,8 +28,10 @@ var options = {
       title: 'Sissy Academy API', // Title (required)
       version: '0.0.1', // Version (required)
     },
+    host: 'localhost:5001',
+    basePath: '/'
   },
-  apis: ['./src/routes.js'], // Path to the API docs
+  apis: ['./src/routes.js', './api-doc/definitions.yaml'], // Path to the API docs
 };
 
 // Initialize swagger-jsdoc -> returns validated swagger spec in json format
