@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+
 var userSchema = new mongoose.Schema({
     email : {
         type: String,
@@ -10,6 +11,7 @@ var userSchema = new mongoose.Schema({
         required: true
     }
 });
+
 var User = mongoose.model('User', userSchema);
 
 var habitSchema = new mongoose.Schema({
@@ -33,6 +35,7 @@ var habitSchema = new mongoose.Schema({
     day : Date,
     user : String
 });
+
 var Habit = mongoose.model('Habit', habitSchema);
 
 module.exports = {
