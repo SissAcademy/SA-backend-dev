@@ -9,6 +9,8 @@ const port           = 5001;
 var MongoStore = require('connect-mongo');
 let filters = require('./src/filters');
 let controllers = require('./src/controllers');
+let mongoose = require("mongoose");
+let dbMongoose = mongoose.connect(db.url);
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(filters.authentication);

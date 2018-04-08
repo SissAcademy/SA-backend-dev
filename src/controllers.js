@@ -1,10 +1,10 @@
 'use strict';
 
-let api = require('../app/database/users/api');
+let services = require('./services');
 let jwt = require('jsonwebtoken');
 
 let signup = (req, res, next) => {
-    api.createUser(req.body)
+    services.createUser(req.body)
         .then(function(result) {
             res.send(result);
         })
@@ -18,7 +18,7 @@ let signup = (req, res, next) => {
 };
 
 let login = (req, res, next) => {
-    api.checkUser(req.body)
+    services.checkUser(req.body)
         .then(function(user){
             if(user){
                 var token = jwt.sign({email: user.email, id: user._id}, 'mypass');
@@ -33,7 +33,7 @@ let login = (req, res, next) => {
 };
 
 let addReport = (req, res, next) => {
-    api.report(req.body, req.user)
+    services.report(req.body, req.user)
         .then(function(result) {
             res.send("Habit(s) reported successfully");
         })
@@ -43,7 +43,7 @@ let addReport = (req, res, next) => {
 };
 
 let addHabits = (req, res, next) => {
-    api.habits(req.user)
+    services.habits(req.user)
         .then(function(result) {
             res.send(result);
         })
