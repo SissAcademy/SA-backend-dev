@@ -6,7 +6,12 @@ let jwt = require('jsonwebtoken');
 let signup = (req, res, next) => {
     services.createUser(req.body)
         .then(function(result) {
-            res.send(result);
+            let responseBody = {
+                id: result._id,
+                email: result.email
+            };
+
+            res.send(responseBody);
         })
         .catch(function(err) {
             if (err.toJSON().code === 11000){
