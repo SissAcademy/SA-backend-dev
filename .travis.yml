@@ -7,4 +7,4 @@ deploy:
   provider: script
   script: bash scripts/deploy.sh
   on:
-    branch: do-deploy
+    branch: master
