@@ -3,7 +3,7 @@
 let jwt = require('jsonwebtoken');
 
 function authentication(req, res, next) {
-    var unsecurePaths = ['/login', '/signup'];
+    var unsecurePaths = ['/login', '/signup', '/swagger.json'];
     if (unsecurePaths.includes(req.originalUrl)) {
         next()
     } else {

@@ -11,14 +11,39 @@ let filters = require('./src/filters');
 let controllers = require('./src/controllers');
 let mongoose = require("mongoose");
 let dbMongoose = mongoose.connect(db.url);
+let routes = require('./src/routes');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(filters.authentication);
+app.use('/', routes);
 
-app.post('/signup', controllers.signup);
-app.post('/login', controllers.login);
-app.post('/users/report', controllers.addReport);
-app.post('/users/habits', controllers.addHabits);
+
+
+
+var swaggerJSDoc = require('swagger-jsdoc');
+
+var options = {
+  swaggerDefinition: {
+    info: {
+      title: 'Sissy Academy API', // Title (required)
+      version: '0.0.1', // Version (required)
+    },
+  },
+  apis: ['./src/routes.js'], // Path to the API docs
+};
+
+// Initialize swagger-jsdoc -> returns validated swagger spec in json format
+var swaggerSpec = swaggerJSDoc(options);
+
+// serve swagger
+app.get('/swagger.json', function(req, res) {
+    res.setHeader('Content-Type', 'application/json');
+    res.send(swaggerSpec);
+  });
+
+
+
+
 
 MongoClient.connect(db.url, (err, database) => {
     if (err) {
@@ -29,3 +54,4 @@ MongoClient.connect(db.url, (err, database) => {
         console.log('We are live on ' + port);
     });
 });
+

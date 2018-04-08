@@ -19,7 +19,8 @@
     "mongodb": "^3.0.1",
     "mongoose": "^4.13.9",
     "jsonwebtoken": "^8.2.1",
-    "pm2": "^2.10.2"
+    "pm2": "^2.10.2",
+    "swagger-jsdoc": "^1.9.7"
   },
   "devDependencies": {
     "nodemon": "^1.14.11",
