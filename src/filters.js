@@ -1,10 +1,11 @@
 'use strict';
 
 let jwt = require('jsonwebtoken');
+let pathValidator = require('./tools/urlPathValidator');
 
 function authentication(req, res, next) {
-    var unsecurePaths = ['/login', '/signup', '/swagger.json'];
-    if (unsecurePaths.includes(req.originalUrl)) {
+    var unsecurePaths = ['/login', '/signup', '/swagger.json', '/api-docs.*'];
+    if (pathValidator.with(unsecurePaths).accepts(req.originalUrl)) {
         next()
     } else {
         if (req. headers && req.headers.authorization && req.headers.authorization.split(' ')[0] === 'JWT') {
@@ -16,7 +17,7 @@ function authentication(req, res, next) {
                 next();
             });
         } else {
-            res.status(403).send("Invalid user");
+            res.status(403).send("Invalid user for resorce " + req.originalUrl);
         }
     }
 }

@@ -6,7 +6,8 @@
   "scripts": {
     "test": "mocha",
     "start": "pm2 start server.js",
-    "restart": "pm2 restart all"
+    "restart": "pm2 restart all",
+    "devel": "pm2 start server.js --watch"
   },
   "keywords": [],
   "author": "Christine Stretches <selfcurious@gmail.com>",
@@ -20,7 +21,8 @@
     "mongoose": "^4.13.9",
     "jsonwebtoken": "^8.2.1",
     "pm2": "^2.10.2",
-    "swagger-jsdoc": "^1.9.7"
+    "swagger-jsdoc": "^1.9.7",
+    "swagger-ui-express": "^3.0.6"
   },
   "devDependencies": {
     "nodemon": "^1.14.11",
