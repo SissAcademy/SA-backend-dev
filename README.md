@@ -8,7 +8,7 @@ Make sure you have node.js installed. Current node version `v8.9.0`
 
 # Configuration
 
-You should have a configuration file in your home folder. The name must be `sissacademy.json` with the content below.
+You should have a configuration file in your home folder. The name must be `~/.sissacademy.json` with the content below.
 
 ```
 {
